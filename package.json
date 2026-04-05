@@ -1,0 +1,13 @@
+{
+  "name": "bun-firebase",
+  "version": "1.0.0",
+  "description": "Minimal example of Firebase Firestore running with Bun",
+  "type": "module",
+  "scripts": {
+    "start:bun": "bun run firestore.js",
+    "start:node": "node --env-file=.env firestore.js"
+  },
+  "dependencies": {
+    "firebase": "^12.11.0"
+  }
+}
