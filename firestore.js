@@ -1,6 +1,7 @@
 import { initializeApp } from 'firebase/app'
 import {
   getFirestore,
+  connectFirestoreEmulator,
   collection,
   addDoc,
   getDocs,
@@ -8,16 +9,21 @@ import {
 } from 'firebase/firestore'
 
 const firebaseConfig = {
-  apiKey: process.env.FIREBASE_API_KEY,
-  authDomain: process.env.FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.FIREBASE_PROJECT_ID,
-  storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.FIREBASE_APP_ID,
+  apiKey: process.env.FIREBASE_API_KEY || 'fake-api-key',
+  authDomain: process.env.FIREBASE_AUTH_DOMAIN || 'localhost',
+  projectId: process.env.FIREBASE_PROJECT_ID || 'demo-project',
+  storageBucket: process.env.FIREBASE_STORAGE_BUCKET || '',
+  messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID || '',
+  appId: process.env.FIREBASE_APP_ID || 'demo-app-id',
 }
 
 const app = initializeApp(firebaseConfig)
 const db = getFirestore(app)
+
+if (process.env.FIRESTORE_EMULATOR_HOST) {
+  const [host, port] = process.env.FIRESTORE_EMULATOR_HOST.split(':')
+  connectFirestoreEmulator(db, host, Number(port))
+}
 
 const citiesRef = collection(db, 'cities')
 
