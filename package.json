@@ -1,0 +1,19 @@
+{
+  "name": "bun-firebase",
+  "version": "1.0.0",
+  "description": "Minimal example of Firebase Firestore running with Bun",
+  "type": "module",
+  "scripts": {
+    "start:bun": "bun run firestore.js",
+    "start:node": "node --env-file=.env firestore.js",
+    "emulator": "firebase emulators:start --project demo-test",
+    "test:node": "FIRESTORE_EMULATOR_HOST=127.0.0.1:8080 node test.js",
+    "test:bun": "FIRESTORE_EMULATOR_HOST=127.0.0.1:8080 bun run test.js"
+  },
+  "dependencies": {
+    "firebase": "^12.11.0"
+  },
+  "devDependencies": {
+    "firebase-tools": "^13.35.1"
+  }
+}
